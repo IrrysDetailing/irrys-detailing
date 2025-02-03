@@ -57,6 +57,30 @@
     }
     
     /* ==============================
+       KEYFRAMES ANIMATIONS
+    =============================== */
+    @keyframes fadeInDown {
+      0% { opacity: 0; transform: translateY(-20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      0% { opacity: 0; transform: translateY(20px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideInLeft {
+      0% { opacity: 0; transform: translateX(-50px); }
+      100% { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes zoomIn {
+      0% { opacity: 0; transform: scale(0.8); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+    
+    /* ==============================
        HEADER & NAVIGATION
     =============================== */
     header {
@@ -157,11 +181,13 @@
       margin-bottom: 20px;
       text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
       animation: fadeInDown 1.5s var(--transition-ease) both;
+      animation-delay: 0s;
     }
     .hero-overlay p {
       font-size: 1.2rem;
       margin-bottom: 30px;
       animation: fadeInUp 1.5s var(--transition-ease) both;
+      animation-delay: 0.3s;
     }
     .btn-cta {
       display: inline-block;
@@ -174,6 +200,7 @@
       text-transform: uppercase;
       transition: transform 0.3s var(--transition-ease), box-shadow 0.3s var(--transition-ease), background 0.3s var(--transition-ease);
       animation: fadeInUp 1.5s var(--transition-ease) both;
+      animation-delay: 0.6s;
     }
     .btn-cta:hover {
       transform: translateY(-2px) scale(1.03);
@@ -182,19 +209,7 @@
     }
     
     /* ==============================
-       TEXT ANIMATIONS
-    =============================== */
-    @keyframes fadeInDown {
-      0% { opacity: 0; transform: translateY(-20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeInUp {
-      0% { opacity: 0; transform: translateY(20px); }
-      100% { opacity: 1; transform: translateY(0); }
-    }
-    
-    /* ==============================
-       SECTIONS
+       SECTION HEADINGS & TEXT
     =============================== */
     main section {
       padding: 80px 20px;
@@ -205,6 +220,8 @@
       margin-bottom: 25px;
       position: relative;
       display: inline-block;
+      animation: slideInLeft 1s var(--transition-ease) both;
+      animation-delay: 0.2s;
     }
     main section h2::after {
       content: "";
@@ -243,6 +260,8 @@
     .package h3 {
       margin-bottom: 15px;
       font-size: 1.2rem;
+      animation: zoomIn 1s var(--transition-ease) both;
+      animation-delay: 0.3s;
     }
     .package p {
       margin-bottom: 15px;
@@ -262,6 +281,8 @@
     .commercial h3 {
       margin-bottom: 15px;
       font-size: 1.4rem;
+      animation: zoomIn 1s var(--transition-ease) both;
+      animation-delay: 0.3s;
     }
     .commercial-buttons {
       display: flex;
@@ -313,6 +334,7 @@
       display: block;
       filter: drop-shadow(0 0 20px rgba(212, 175, 55, 0.5));
       transition: transform 0.4s, filter 0.4s;
+      animation: float 3s ease-in-out infinite;
     }
     .about-me-img:hover {
       transform: scale(1.05);
@@ -535,7 +557,7 @@
       });
     })();
     
-    // Intersection Observer für optionale Fade-In Effekte (z. B. für weitere Inhalte, falls benötigt)
+    // Intersection Observer für optionale Fade-In Effekte
     document.addEventListener('DOMContentLoaded', () => {
       const fadeInElements = document.querySelectorAll('.fade-in-up');
       const options = { threshold: 0.1 };
