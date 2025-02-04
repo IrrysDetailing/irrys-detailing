@@ -8,7 +8,7 @@
   <!-- Google Fonts: Montserrat & Playfair Display -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   
-  <!-- EmailJS SDK einbinden und initialisieren -->
+  <!-- EmailJS SDK einbinden (falls noch benötigt) -->
   <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script type="text/javascript">
     (function(){
@@ -87,7 +87,7 @@
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
-    /* Neue Animation: Bounce-In für die Buchungsbestätigung */
+    /* (Bounce-In Animation bleibt definiert, wird aktuell aber nicht verwendet) */
     @keyframes bounceIn {
       0% {
         opacity: 0;
@@ -116,10 +116,6 @@
       opacity: 1;
       transform: translateY(0);
       transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-    }
-    /* Bounce-In-Klasse */
-    .bounce-in {
-      animation: bounceIn 1s ease-out both;
     }
     
     /* ==============================
@@ -383,69 +379,7 @@
       filter: drop-shadow(0 0 40px rgba(212, 175, 55, 0.7));
     }
     
-    /* ------------------------------
-       Booking Section (Termin buchen)
-    ------------------------------ */
-    #booking {
-      padding: 80px 20px;
-      background-color: var(--color-gray-mid);
-    }
-    #booking h2 {
-      font-size: 2.5rem;
-      margin-bottom: 20px;
-      animation: slideInLeft 1s var(--transition-ease) both;
-    }
-    #booking form {
-      max-width: 600px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-    #booking form input, 
-    #booking form button {
-      padding: 10px;
-      font-size: 1rem;
-      border-radius: 4px;
-      border: none;
-    }
-    #booking form input {
-      border: 1px solid var(--color-gold);
-      background-color: var(--color-black);
-      color: var(--color-white);
-    }
-    #booking form button {
-      background: var(--color-gold);
-      color: var(--color-black);
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    #booking form button:hover {
-      background: #c4972c;
-    }
-    #bookingConfirmation {
-      max-width: 600px;
-      margin: 20px auto 0;
-      text-align: center;
-      /* Neue Bounce-In Animation hinzufügen */
-      opacity: 0;
-    }
-    #bookingConfirmation.bounce-in {
-      animation: bounceIn 1s ease-out both;
-    }
-    #bookingConfirmation button {
-      margin-top: 10px;
-      padding: 10px 20px;
-      background: var(--color-gold);
-      color: var(--color-black);
-      border-radius: 4px;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    #bookingConfirmation button:hover {
-      background: #c4972c;
-    }
+    /* BOOKING SECTION wurde entfernt */
     
     /* ------------------------------
        Footer
@@ -528,9 +462,57 @@
         padding: 30px 10px;
       }
     }
+    
+    /* ==============================
+       MAINTENANCE OVERLAY STYLES
+    =============================== */
+    #maintenance-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--color-bg);
+      color: var(--color-white);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      text-align: center;
+      padding: 20px;
+    }
+    #maintenance-overlay h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+    #maintenance-overlay p {
+      font-size: 1.2rem;
+      margin-bottom: 30px;
+    }
+    #maintenance-overlay button {
+      background: linear-gradient(135deg, var(--color-gold), #c4972c);
+      color: var(--color-black);
+      padding: 12px 28px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    #maintenance-overlay button:hover {
+      transform: translateY(-2px) scale(1.03);
+    }
   </style>
 </head>
 <body>
+  <!-- Maintenance Overlay -->
+  <div id="maintenance-overlay">
+    <h1>Wir machen gerade eine Pause</h1>
+    <p>Unsere Neueröffnung ist geplant für den 01.03.<br>Bitte schauen Sie später noch einmal vorbei!</p>
+    <button id="maintenance-button">Webseite trotzdem ansehen</button>
+  </div>
+  
   <!-- HEADER -->
   <header>
     <img src="logo.png" alt="Irrys Detailing Logo">
@@ -618,23 +600,6 @@
       </div>
     </section>
     
-    <!-- BOOKING SECTION (Termin buchen) -->
-    <section id="booking" class="fade-in-up" aria-labelledby="booking-heading">
-      <h2 id="booking-heading">Termin buchen</h2>
-      <form id="bookingForm">
-        <input type="text" name="name" placeholder="Ihr Name" required>
-        <input type="text" name="vehicle" placeholder="Fahrzeugmarke & Modell" required>
-        <input type="datetime-local" name="appointment" required>
-        <input type="tel" name="phone" placeholder="Telefonnummer" required>
-        <input type="email" name="email" placeholder="Ihre E-Mail" required>
-        <button type="submit">Termin buchen</button>
-      </form>
-      <div id="bookingConfirmation" style="display:none; margin-top:20px;">
-        <p>Vielen Dank! Ihre Buchung wurde erfolgreich versendet.</p>
-        <button id="addToCalendar">Termin in Kalender einfügen</button>
-      </div>
-    </section>
-    
     <!-- FOOTER -->
     <footer id="contact">
       <p>Adresse: Mühlbachstraße 20, Neusäß 86356</p>
@@ -680,7 +645,7 @@
       });
     })();
     
-    // Intersection Observer für Fade-In-Up Effekte (auf Elemente mit der Klasse "fade-in-up")
+    // Intersection Observer für Fade-In-Up Effekte
     document.addEventListener('DOMContentLoaded', () => {
       const fadeInElements = document.querySelectorAll('.fade-in-up');
       const options = { threshold: 0.1 };
@@ -700,6 +665,14 @@
       menuToggle.addEventListener('click', () => {
         nav.classList.toggle('active');
       });
+      
+      // Maintenance Overlay: Button zum Ausblenden
+      const maintenanceButton = document.getElementById('maintenance-button');
+      if (maintenanceButton) {
+        maintenanceButton.addEventListener('click', function() {
+          document.getElementById('maintenance-overlay').style.display = 'none';
+        });
+      }
     });
     
     // Hero Bilder "Vanish" Effekt beim Scrollen
@@ -717,108 +690,6 @@
         }
       });
     })();
-    
-    // TERMIN-BUCHUNG: Formular absenden und E-Mails via EmailJS senden
-    const bookingForm = document.getElementById('bookingForm');
-    bookingForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      // Formularfelder auslesen
-      const name = this.name.value;
-      const vehicle = this.vehicle.value;
-      const appointment = this.appointment.value; // ISO-Format (datetime-local)
-      const phone = this.phone.value;
-      const email = this.email.value;
-      
-      // Speichern des Termins (für die Kalenderfunktion)
-      window.bookingAppointment = appointment;
-      
-      // Parameter für die E-Mail an den Betreiber (Owner)
-      const ownerParams = {
-        from_name: name,
-        vehicle: vehicle,
-        appointment: appointment,
-        phone: phone,
-        email: email,
-        message: "Glückwunsch, neuer Termin!"
-      };
-      
-      // Parameter für die E-Mail an den Kunden (Client)
-      const clientParams = {
-        to_name: name,
-        appointment: appointment,
-        message: "Wir warten gespannt auf Sie. Klicken Sie auf den Button in der Bestätigung, um den Termin in Ihren Kalender einzufügen."
-      };
-      
-      // E-Mail an den Betreiber senden
-      emailjs.send('service_rnyo4rj', 'template_32tep4i', ownerParams, 'V0d0-XHW2_JJ25KPi')
-        .then(function(response) {
-          console.log('Owner E-Mail gesendet!', response.status, response.text);
-        }, function(error) {
-          console.log('Owner E-Mail FEHLGESCHLAGEN...', error);
-        });
-      
-      // E-Mail an den Kunden senden
-      emailjs.send('service_rnyo4rj', 'template_ydys46e', clientParams, 'V0d0-XHW2_JJ25KPi')
-        .then(function(response) {
-          console.log('Client E-Mail gesendet!', response.status, response.text);
-        }, function(error) {
-          console.log('Client E-Mail FEHLGESCHLAGEN...', error);
-        });
-      
-      // Formular ausblenden, Bestätigung anzeigen und Bounce-In Animation anwenden
-      bookingForm.style.display = 'none';
-      const confirmation = document.getElementById('bookingConfirmation');
-      confirmation.style.display = 'block';
-      confirmation.classList.add('bounce-in');
-      
-      // Formular zurücksetzen
-      this.reset();
-    });
-    
-    // Termin in Kalender einfügen: ICS-Datei generieren und zum Download anbieten
-    document.getElementById('addToCalendar').addEventListener('click', function() {
-      if (!window.bookingAppointment) return;
-      
-      const appointmentDate = new Date(window.bookingAppointment);
-      
-      // Funktion zum Formatieren ins ICS-Datumsformat (UTC: YYYYMMDDTHHmmssZ)
-      function formatDate(date) {
-        const pad = n => n < 10 ? '0' + n : n;
-        return date.getUTCFullYear().toString() +
-               pad(date.getUTCMonth() + 1) +
-               pad(date.getUTCDate()) + 'T' +
-               pad(date.getUTCHours()) +
-               pad(date.getUTCMinutes()) +
-               pad(date.getUTCSeconds()) + 'Z';
-      }
-      
-      const startDate = formatDate(appointmentDate);
-      // Terminende: 1 Stunde später
-      const endDate = formatDate(new Date(appointmentDate.getTime() + 60 * 60 * 1000));
-      
-      const icsContent = `BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//Irrys Detailing//Appointment//EN
-BEGIN:VEVENT
-UID:${Date.now()}@irrysdetailing.com
-DTSTAMP:${startDate}
-DTSTART:${startDate}
-DTEND:${endDate}
-SUMMARY:Termin bei Irrys Detailing
-DESCRIPTION:Wir warten gespannt auf Sie.
-END:VEVENT
-END:VCALENDAR`;
-      
-      const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = 'termin.ics';
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    });
   </script>
 </body>
 </html>
