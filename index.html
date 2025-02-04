@@ -87,6 +87,23 @@
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
     }
+    /* Neue Animation: Bounce-In für die Buchungsbestätigung */
+    @keyframes bounceIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.3);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      70% {
+        transform: scale(0.9);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
     
     /* ==============================
        SCROLL-ANIMATION (Fade-In-Up)
@@ -99,6 +116,10 @@
       opacity: 1;
       transform: translateY(0);
       transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    /* Bounce-In-Klasse */
+    .bounce-in {
+      animation: bounceIn 1s ease-out both;
     }
     
     /* ==============================
@@ -407,6 +428,11 @@
       max-width: 600px;
       margin: 20px auto 0;
       text-align: center;
+      /* Neue Bounce-In Animation hinzufügen */
+      opacity: 0;
+    }
+    #bookingConfirmation.bounce-in {
+      animation: bounceIn 1s ease-out both;
     }
     #bookingConfirmation button {
       margin-top: 10px;
@@ -740,9 +766,11 @@
           console.log('Client E-Mail FEHLGESCHLAGEN...', error);
         });
       
-      // Formular ausblenden, Bestätigung anzeigen
+      // Formular ausblenden, Bestätigung anzeigen und Bounce-In Animation anwenden
       bookingForm.style.display = 'none';
-      document.getElementById('bookingConfirmation').style.display = 'block';
+      const confirmation = document.getElementById('bookingConfirmation');
+      confirmation.style.display = 'block';
+      confirmation.classList.add('bounce-in');
       
       // Formular zurücksetzen
       this.reset();
