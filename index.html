@@ -8,11 +8,11 @@
   <!-- Google Fonts: Montserrat (Fließtext) & Playfair Display (Überschriften) -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   
-  <!-- EmailJS SDK (zum Versenden von E-Mails) -->
+  <!-- EmailJS SDK einbinden und initialisieren -->
   <script type="text/javascript" src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script type="text/javascript">
     (function(){
-      emailjs.init("YOUR_USER_ID"); // Ersetze YOUR_USER_ID mit deiner EmailJS User ID
+      emailjs.init("V0d0-XHW2_JJ25KPi");
     })();
   </script>
   
@@ -684,17 +684,17 @@
     bookingForm.addEventListener('submit', function(e) {
       e.preventDefault();
       
-      // Felder auslesen
+      // Formularfelder auslesen
       const name = this.name.value;
       const vehicle = this.vehicle.value;
-      const appointment = this.appointment.value; // ISO-Format aus datetime-local
+      const appointment = this.appointment.value; // ISO-Format (datetime-local)
       const phone = this.phone.value;
       const email = this.email.value;
       
-      // Speichern des Termins (für Kalenderfunktion)
+      // Speichern des Termins (für die Kalenderfunktion)
       window.bookingAppointment = appointment;
       
-      // Parameter für E-Mail an den Seitenbetreiber (Owner)
+      // Parameter für die E-Mail an den Betreiber (Owner)
       const ownerParams = {
         from_name: name,
         vehicle: vehicle,
@@ -704,23 +704,23 @@
         message: "Glückwunsch, neuer Termin!"
       };
       
-      // Parameter für E-Mail an den Kunden (Client)
+      // Parameter für die E-Mail an den Kunden (Client)
       const clientParams = {
         to_name: name,
         appointment: appointment,
         message: "Wir warten gespannt auf Sie. Klicken Sie auf den Button in der Bestätigung, um den Termin in Ihren Kalender einzufügen."
       };
       
-      // E-Mail an den Owner senden
-      emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID_OWNER', ownerParams, 'YOUR_USER_ID')
+      // E-Mail an den Betreiber senden
+      emailjs.send('service_rnyo4rj', 'template_32tep4i', ownerParams, 'V0d0-XHW2_JJ25KPi')
         .then(function(response) {
           console.log('Owner E-Mail gesendet!', response.status, response.text);
         }, function(error) {
           console.log('Owner E-Mail FEHLGESCHLAGEN...', error);
         });
       
-      // E-Mail an den Client senden
-      emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID_CLIENT', clientParams, 'YOUR_USER_ID')
+      // E-Mail an den Kunden senden
+      emailjs.send('service_rnyo4rj', 'template_ydys46e', clientParams, 'V0d0-XHW2_JJ25KPi')
         .then(function(response) {
           console.log('Client E-Mail gesendet!', response.status, response.text);
         }, function(error) {
