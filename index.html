@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Irrys Detailing – Ultimative Fahrzeugaufbereitung</title>
   <link rel="icon" type="image/png" href="logo.png">
-  <!-- Google Fonts: Montserrat (Fließtext) & Playfair Display (Überschriften) -->
+  <!-- Google Fonts: Montserrat & Playfair Display -->
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
   
   <!-- EmailJS SDK einbinden und initialisieren -->
@@ -86,6 +86,19 @@
     @keyframes float {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-10px); }
+    }
+    
+    /* ==============================
+       SCROLL-ANIMATION (Fade-In-Up)
+    =============================== */
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .fade-in-up.appear {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     }
     
     /* ==============================
@@ -520,7 +533,7 @@
     </section>
     
     <!-- PACKAGES SECTION -->
-    <section id="packages" aria-labelledby="packages-heading">
+    <section id="packages" class="fade-in-up" aria-labelledby="packages-heading">
       <h2 id="packages-heading">Unsere Pakete</h2>
       <p>Wir bieten ausschließlich Innenraumaufbereitung an – für ein perfektes Fahrerlebnis.</p>
       <div class="packages">
@@ -546,7 +559,7 @@
     </section>
     
     <!-- COMMERCIAL SECTION -->
-    <section id="commercial" aria-labelledby="commercial-heading">
+    <section id="commercial" class="fade-in-up" aria-labelledby="commercial-heading">
       <h2 id="commercial-heading">Gewerbliche Kunden</h2>
       <div class="commercial">
         <h3>Individuelle Lösungen für Firmenkunden</h3>
@@ -560,7 +573,7 @@
     </section>
     
     <!-- ABOUT ME SECTION -->
-    <section id="about" class="about-me" aria-labelledby="about-heading">
+    <section id="about" class="about-me fade-in-up" aria-labelledby="about-heading">
       <h2 id="about-heading">Der Gründer</h2>
       <div class="founder-container">
         <div class="founder-text">
@@ -580,7 +593,7 @@
     </section>
     
     <!-- BOOKING SECTION (Termin buchen) -->
-    <section id="booking" aria-labelledby="booking-heading">
+    <section id="booking" class="fade-in-up" aria-labelledby="booking-heading">
       <h2 id="booking-heading">Termin buchen</h2>
       <form id="bookingForm">
         <input type="text" name="name" placeholder="Ihr Name" required>
@@ -641,7 +654,7 @@
       });
     })();
     
-    // Intersection Observer für optionale Fade-In Effekte
+    // Intersection Observer für Fade-In-Up Effekte (auf Elemente mit der Klasse "fade-in-up")
     document.addEventListener('DOMContentLoaded', () => {
       const fadeInElements = document.querySelectorAll('.fade-in-up');
       const options = { threshold: 0.1 };
@@ -670,7 +683,7 @@
       if (!hero || images.length === 0) return;
       const heroHeight = hero.offsetHeight;
       window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
+        const scrollY = window.pageYOffset;
         if (scrollY > heroHeight / 2) {
           images.forEach(img => img.classList.add('vanish'));
         } else {
